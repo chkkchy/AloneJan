@@ -19,17 +19,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        print(tiles.wall)
-        print(tiles.wall.count)
-        
         for _ in 0 ..< 13 {
             let tsumo = tiles.wall.removeLast()
             hand.append(tsumo)
+            print(tsumo.string)
         }
-        print(hand)
         
         
         
+        let screenWidth = Double(UIScreen.mainScreen().bounds.size.width)
         let w = (view.bounds.size.width - (13 * 2) - (2 * 2)) / 13
         
         let layout = UICollectionViewFlowLayout()
@@ -37,6 +35,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         layout.minimumInteritemSpacing = 2.0
         layout.sectionInset = UIEdgeInsetsMake(2, 2, 2, 2)
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        collectionView.frame = CGRect(x: 0, y: 500, width: screenWidth, height: 100)
+        collectionView.layer.borderColor = UIColor.grayColor().CGColor
         collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         collectionView.delegate = self
         collectionView.dataSource = self
