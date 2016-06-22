@@ -1,0 +1,522 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F18064651D1A51D000800D29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18064641D1A51D000800D29 /* AppDelegate.swift */; };
+		F18064671D1A51D000800D29 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18064661D1A51D000800D29 /* ViewController.swift */; };
+		F180646A1D1A51D000800D29 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F18064681D1A51D000800D29 /* Main.storyboard */; };
+		F180646D1D1A51D000800D29 /* AloneJan.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F180646B1D1A51D000800D29 /* AloneJan.xcdatamodeld */; };
+		F180646F1D1A51D000800D29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F180646E1D1A51D000800D29 /* Assets.xcassets */; };
+		F18064721D1A51D000800D29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F18064701D1A51D000800D29 /* LaunchScreen.storyboard */; };
+		F180647D1D1A51D000800D29 /* AloneJanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F180647C1D1A51D000800D29 /* AloneJanTests.swift */; };
+		F18064881D1A51D000800D29 /* AloneJanUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18064871D1A51D000800D29 /* AloneJanUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F18064791D1A51D000800D29 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F18064591D1A51D000800D29 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F18064601D1A51D000800D29;
+			remoteInfo = AloneJan;
+		};
+		F18064841D1A51D000800D29 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F18064591D1A51D000800D29 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F18064601D1A51D000800D29;
+			remoteInfo = AloneJan;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F18064611D1A51D000800D29 /* AloneJan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AloneJan.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F18064641D1A51D000800D29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F18064661D1A51D000800D29 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F18064691D1A51D000800D29 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F180646C1D1A51D000800D29 /* AloneJan.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AloneJan.xcdatamodel; sourceTree = "<group>"; };
+		F180646E1D1A51D000800D29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F18064711D1A51D000800D29 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F18064731D1A51D000800D29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F18064781D1A51D000800D29 /* AloneJanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AloneJanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F180647C1D1A51D000800D29 /* AloneJanTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AloneJanTests.swift; sourceTree = "<group>"; };
+		F180647E1D1A51D000800D29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F18064831D1A51D000800D29 /* AloneJanUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AloneJanUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F18064871D1A51D000800D29 /* AloneJanUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AloneJanUITests.swift; sourceTree = "<group>"; };
+		F18064891D1A51D000800D29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F180645E1D1A51D000800D29 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F18064751D1A51D000800D29 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F18064801D1A51D000800D29 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F18064581D1A51D000800D29 = {
+			isa = PBXGroup;
+			children = (
+				F18064631D1A51D000800D29 /* AloneJan */,
+				F180647B1D1A51D000800D29 /* AloneJanTests */,
+				F18064861D1A51D000800D29 /* AloneJanUITests */,
+				F18064621D1A51D000800D29 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F18064621D1A51D000800D29 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F18064611D1A51D000800D29 /* AloneJan.app */,
+				F18064781D1A51D000800D29 /* AloneJanTests.xctest */,
+				F18064831D1A51D000800D29 /* AloneJanUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F18064631D1A51D000800D29 /* AloneJan */ = {
+			isa = PBXGroup;
+			children = (
+				F18064641D1A51D000800D29 /* AppDelegate.swift */,
+				F18064661D1A51D000800D29 /* ViewController.swift */,
+				F18064681D1A51D000800D29 /* Main.storyboard */,
+				F180646E1D1A51D000800D29 /* Assets.xcassets */,
+				F18064701D1A51D000800D29 /* LaunchScreen.storyboard */,
+				F18064731D1A51D000800D29 /* Info.plist */,
+				F180646B1D1A51D000800D29 /* AloneJan.xcdatamodeld */,
+			);
+			path = AloneJan;
+			sourceTree = "<group>";
+		};
+		F180647B1D1A51D000800D29 /* AloneJanTests */ = {
+			isa = PBXGroup;
+			children = (
+				F180647C1D1A51D000800D29 /* AloneJanTests.swift */,
+				F180647E1D1A51D000800D29 /* Info.plist */,
+			);
+			path = AloneJanTests;
+			sourceTree = "<group>";
+		};
+		F18064861D1A51D000800D29 /* AloneJanUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F18064871D1A51D000800D29 /* AloneJanUITests.swift */,
+				F18064891D1A51D000800D29 /* Info.plist */,
+			);
+			path = AloneJanUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F18064601D1A51D000800D29 /* AloneJan */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F180648C1D1A51D000800D29 /* Build configuration list for PBXNativeTarget "AloneJan" */;
+			buildPhases = (
+				F180645D1D1A51D000800D29 /* Sources */,
+				F180645E1D1A51D000800D29 /* Frameworks */,
+				F180645F1D1A51D000800D29 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AloneJan;
+			productName = AloneJan;
+			productReference = F18064611D1A51D000800D29 /* AloneJan.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F18064771D1A51D000800D29 /* AloneJanTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F180648F1D1A51D000800D29 /* Build configuration list for PBXNativeTarget "AloneJanTests" */;
+			buildPhases = (
+				F18064741D1A51D000800D29 /* Sources */,
+				F18064751D1A51D000800D29 /* Frameworks */,
+				F18064761D1A51D000800D29 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F180647A1D1A51D000800D29 /* PBXTargetDependency */,
+			);
+			name = AloneJanTests;
+			productName = AloneJanTests;
+			productReference = F18064781D1A51D000800D29 /* AloneJanTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F18064821D1A51D000800D29 /* AloneJanUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F18064921D1A51D000800D29 /* Build configuration list for PBXNativeTarget "AloneJanUITests" */;
+			buildPhases = (
+				F180647F1D1A51D000800D29 /* Sources */,
+				F18064801D1A51D000800D29 /* Frameworks */,
+				F18064811D1A51D000800D29 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F18064851D1A51D000800D29 /* PBXTargetDependency */,
+			);
+			name = AloneJanUITests;
+			productName = AloneJanUITests;
+			productReference = F18064831D1A51D000800D29 /* AloneJanUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F18064591D1A51D000800D29 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "田村 優吉";
+				TargetAttributes = {
+					F18064601D1A51D000800D29 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					F18064771D1A51D000800D29 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = F18064601D1A51D000800D29;
+					};
+					F18064821D1A51D000800D29 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = F18064601D1A51D000800D29;
+					};
+				};
+			};
+			buildConfigurationList = F180645C1D1A51D000800D29 /* Build configuration list for PBXProject "AloneJan" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F18064581D1A51D000800D29;
+			productRefGroup = F18064621D1A51D000800D29 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F18064601D1A51D000800D29 /* AloneJan */,
+				F18064771D1A51D000800D29 /* AloneJanTests */,
+				F18064821D1A51D000800D29 /* AloneJanUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F180645F1D1A51D000800D29 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F18064721D1A51D000800D29 /* LaunchScreen.storyboard in Resources */,
+				F180646F1D1A51D000800D29 /* Assets.xcassets in Resources */,
+				F180646A1D1A51D000800D29 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F18064761D1A51D000800D29 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F18064811D1A51D000800D29 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F180645D1D1A51D000800D29 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F18064671D1A51D000800D29 /* ViewController.swift in Sources */,
+				F180646D1D1A51D000800D29 /* AloneJan.xcdatamodeld in Sources */,
+				F18064651D1A51D000800D29 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F18064741D1A51D000800D29 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F180647D1D1A51D000800D29 /* AloneJanTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F180647F1D1A51D000800D29 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F18064881D1A51D000800D29 /* AloneJanUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F180647A1D1A51D000800D29 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F18064601D1A51D000800D29 /* AloneJan */;
+			targetProxy = F18064791D1A51D000800D29 /* PBXContainerItemProxy */;
+		};
+		F18064851D1A51D000800D29 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F18064601D1A51D000800D29 /* AloneJan */;
+			targetProxy = F18064841D1A51D000800D29 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F18064681D1A51D000800D29 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F18064691D1A51D000800D29 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F18064701D1A51D000800D29 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F18064711D1A51D000800D29 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F180648A1D1A51D000800D29 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F180648B1D1A51D000800D29 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F180648D1D1A51D000800D29 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = AloneJan/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.jan.AloneJan;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F180648E1D1A51D000800D29 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = AloneJan/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.jan.AloneJan;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		F18064901D1A51D000800D29 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = AloneJanTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.jan.AloneJanTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AloneJan.app/AloneJan";
+			};
+			name = Debug;
+		};
+		F18064911D1A51D000800D29 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = AloneJanTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.jan.AloneJanTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AloneJan.app/AloneJan";
+			};
+			name = Release;
+		};
+		F18064931D1A51D000800D29 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = AloneJanUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.jan.AloneJanUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = AloneJan;
+			};
+			name = Debug;
+		};
+		F18064941D1A51D000800D29 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = AloneJanUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.jan.AloneJanUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = AloneJan;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F180645C1D1A51D000800D29 /* Build configuration list for PBXProject "AloneJan" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F180648A1D1A51D000800D29 /* Debug */,
+				F180648B1D1A51D000800D29 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F180648C1D1A51D000800D29 /* Build configuration list for PBXNativeTarget "AloneJan" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F180648D1D1A51D000800D29 /* Debug */,
+				F180648E1D1A51D000800D29 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F180648F1D1A51D000800D29 /* Build configuration list for PBXNativeTarget "AloneJanTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F18064901D1A51D000800D29 /* Debug */,
+				F18064911D1A51D000800D29 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F18064921D1A51D000800D29 /* Build configuration list for PBXNativeTarget "AloneJanUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F18064931D1A51D000800D29 /* Debug */,
+				F18064941D1A51D000800D29 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F180646B1D1A51D000800D29 /* AloneJan.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F180646C1D1A51D000800D29 /* AloneJan.xcdatamodel */,
+			);
+			currentVersion = F180646C1D1A51D000800D29 /* AloneJan.xcdatamodel */;
+			path = AloneJan.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = F18064591D1A51D000800D29 /* Project object */;
+}
