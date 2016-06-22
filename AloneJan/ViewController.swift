@@ -10,14 +10,23 @@ import UIKit
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
+    var leftWallCountLabel = UILabel()
+    var tsumoCountLabel = UILabel()
+    var resetButton = UIButton()
+    
+    var collectionView: UICollectionView!
+    
     var tiles = Tiles()
     var hand = [Tile]()
     
-    var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        let screenWidth = Double(UIScreen.mainScreen().bounds.size.width)
+        
+        
         
         for _ in 0 ..< 13 {
             let tsumo = tiles.wall.removeLast()
@@ -27,7 +36,24 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         
         
-        let screenWidth = Double(UIScreen.mainScreen().bounds.size.width)
+        
+        leftWallCountLabel.frame = CGRect(x: 30, y: 30, width: 100, height: 50)
+        leftWallCountLabel.text = String(format: "のこり:%d", tiles.wall.count)
+        tsumoCountLabel.frame = CGRect(x: 150, y: 30, width: 100, height: 50)
+        tsumoCountLabel.text = String(format: "つも:%d", 136 - (hand.count + tiles.wall.count))
+        self.view.addSubview(leftWallCountLabel)
+        self.view.addSubview(tsumoCountLabel)
+        
+        resetButton.frame = CGRect(x: 30, y: 100, width: 100, height: 50)
+        resetButton.setTitle("Reset", forState: .Normal)
+        resetButton.backgroundColor = .greenColor()
+        resetButton.addTarget(self, action: #selector(ViewController.resetWall), forControlEvents: .TouchUpInside)
+        self.view.addSubview(resetButton)
+        
+        
+        
+        
+        
         let w = (view.bounds.size.width - (13 * 2) - (2 * 2)) / 13
         
         let layout = UICollectionViewFlowLayout()
@@ -52,13 +78,19 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         print("Selected \(indexPath.row)")
         
+        if tiles.wall.count == 0 {
+            resetWall()
+        }
+        
         print("bfr tiles.wall.count: \(tiles.wall.count)")
-        print("bfr hand.count: \(hand.count)")
         hand.removeAtIndex(indexPath.row)
         let tsumo = tiles.wall.removeLast()
         hand.insert(tsumo, atIndex: indexPath.row)
         print("afr tiles.wall.count: \(tiles.wall.count)")
-        print("afr hand.count: \(hand.count)")
+        
+        
+        leftWallCountLabel.text = String(format: "のこり:%d", tiles.wall.count)
+        tsumoCountLabel.text = String(format: "つも:%d", 136 - (hand.count + tiles.wall.count))
         
         
         let cell = collectionView.cellForItemAtIndexPath(indexPath)
@@ -89,6 +121,19 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func drawFromWall() {
+    }
+    
+    func resetWall() {
+        tiles = Tiles()
+        hand = []
+        for _ in 0 ..< 13 {
+            let tsumo = tiles.wall.removeLast()
+            hand.append(tsumo)
+            print(tsumo.string)
+        }
+        
+        // reset collection view
+        collectionView.reloadData()
     }
 
 }
