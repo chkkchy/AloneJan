@@ -82,11 +82,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             resetWall()
         }
         
-        print("bfr tiles.wall.count: \(tiles.wall.count)")
         hand.removeAtIndex(indexPath.row)
         let tsumo = tiles.wall.removeLast()
-        hand.insert(tsumo, atIndex: indexPath.row)
-        print("afr tiles.wall.count: \(tiles.wall.count)")
+//        hand.insert(tsumo, atIndex: indexPath.row)
+        hand.insert(tsumo, atIndex: hand.count)
         
         
         leftWallCountLabel.text = String(format: "のこり:%d", tiles.wall.count)
@@ -99,8 +98,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let imageView = UIImageView(image: image)
         imageView.layer.borderColor = UIColor.blueColor().CGColor
         imageView.backgroundColor = .blueColor()
+        // blur effect
+//        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Dark))
+//        blurView.alpha = 0.2
+//        blurView.frame = imageView.bounds
+//        imageView.addSubview(blurView)
         
         cell?.contentView.addSubview(imageView)
+        
+        collectionView.reloadData()
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
