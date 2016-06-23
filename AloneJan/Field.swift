@@ -1,14 +1,14 @@
 //
-//  Tiles.swift
+//  Field.swift
 //  AloneJan
 //
-//  Created by 田村 優吉 on 2016/06/22.
+//  Created by 田村 優吉 on 2016/06/23.
 //  Copyright © 2016年 田村 優吉. All rights reserved.
 //
 
 import Foundation
 
-class Tiles {
+class Field {
     
     static let tiles = [
         Tile(type: TileType.Honours, string: "東", image: "ji1-66-90-s-emb.png", number: nil),
@@ -47,26 +47,48 @@ class Tiles {
         Tile(type: TileType.Characters, string: "九", image: "man9-66-90-s-emb.png", number: 9)
     ]
     
+    let deadStackCount = 14
+    
+    var round: WindType!
+    
+    var hand: Int
+    
+    var honba: Int
+    
+    var deposit: Int
+    
     var stack: [Tile]
     
+    var deadStack: [Tile]
+    
+    var dora: Tile
+    
     init() {
+        round = WindType(rawValue: Int(arc4random_uniform(UInt32(2))) + 1)
+        hand = Int(arc4random_uniform(UInt32(4))) + 1
+        honba = Int(arc4random_uniform(UInt32(2)))
+        deposit = (Int(arc4random_uniform(UInt32(2)))) * 1000
         stack = []
         for _ in 0..<4 {
             stack += Tiles.tiles
         }
         ArrayUtils.shuffle(&stack)
-        reset()
+        deadStack = Array(stack[1...14])
+        dora = deadStack.first!
     }
     
     func reset() {
+        round = WindType(rawValue: Int(arc4random_uniform(UInt32(2))) + 1)
+        hand = Int(arc4random_uniform(UInt32(4))) + 1
+        honba = Int(arc4random_uniform(UInt32(2)))
+        deposit = (Int(arc4random_uniform(UInt32(2)))) * 1000
         stack = []
         for _ in 0..<4 {
             stack += Tiles.tiles
         }
         ArrayUtils.shuffle(&stack)
+        deadStack = Array(stack[1...14])
+        dora = deadStack.first!
     }
     
-    func isStackEmpty() -> Bool {
-       return stack.count == 0
-    }
 }

@@ -16,12 +16,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     let handCount = 14
 
     var countLabel: UILabel!
+    var conditionLabel: UILabel!
     var resetButton: UIButton!
     var sortButton: UIButton!
     
     var collectionView: UICollectionView!
     
-    var tiles = Tiles()
+    var tiles = Field()
     let player = Player()
     
     override func viewDidLoad() {
@@ -31,9 +32,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         player.drawFrom(&tiles.stack, count: handCount)
         
         
-        countLabel = UILabel(frame: CGRect(x: 30, y: 100, width: 100, height: 50))
+        countLabel = UILabel(frame: CGRect(x: 30, y: 100, width: screenWidth, height: 50))
         updateCountLabel()
         self.view.addSubview(countLabel)
+        
+        conditionLabel = UILabel(frame: CGRect(x: 30, y: 150, width: screenWidth, height: 50))
+        updateConditionLabel()
+        self.view.addSubview(conditionLabel)
         
         resetButton = UIButton(frame: CGRect(x: 30, y: 200, width: 100, height: 50))
         resetButton.setTitle("Reset", forState: .Normal)
@@ -70,7 +75,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if tiles.isStackEmpty() {
+        if tiles.stack.isEmpty {
             return
         }
         player.discardHand(indexPath.row)
@@ -97,6 +102,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         player.reset()
         player.drawFrom(&tiles.stack, count: handCount)
         updateCountLabel()
+        updateConditionLabel()
         collectionView.reloadData()
     }
     
@@ -108,5 +114,20 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func updateCountLabel() {
         countLabel.text = String(format: "%d : %d", tiles.stack.count, 136 - (player.hand.count + tiles.stack.count))
     }
+    
+    func updateConditionLabel() {
+        var round = ""
+        switch tiles.round! {
+        case .East:
+            round = "東"
+        case .South:
+            round = "南"
+        default:
+            break
+
+        }
+        conditionLabel.text = String(format: "%@ %d局 %d本場 供託: %d ドラ: %@", round, tiles.hand, tiles.honba, tiles.deposit, tiles.dora.string)
+    }
+    
 }
 
