@@ -34,7 +34,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         for _ in 0 ..< handCount {
             let tsumo = tiles.wall.removeLast()
             hand.append(tsumo)
-            print(tsumo.string)
         }
         
         
@@ -55,13 +54,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         
         
-        
-        
-        // test
-        let image = UIImage(named: "ji7-66-90-s-emb.png")
+        let image = UIImage(named: "ji7-66-90-s-emb.png") // :TODO
         let w = (view.bounds.size.width - (14 * 2) - (2 * 2)) / 14
         let h = w / (image?.size.width)! * (image?.size.height)!
-        print(w, image?.size.width, image?.size.height, h)
         
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSizeMake(w, h)
@@ -82,7 +77,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        print("Selected \(indexPath.row)")
         
         if tiles.wall.count == 0 {
             resetWall()
