@@ -8,8 +8,8 @@
 
 import Foundation
 
-enum TileType {
+enum TileType: Int {
     
-    case Characters, Circles, Bamboos, Honours
+    case Characters = 1, Circles, Bamboos, Honours
     
 }

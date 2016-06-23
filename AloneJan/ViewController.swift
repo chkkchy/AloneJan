@@ -12,9 +12,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     let handCount = 14
 
-    var leftWallCountLabel = UILabel()
-    var tsumoCountLabel = UILabel()
+    var countLabel = UILabel()
     var resetButton = UIButton()
+    var sortButton = UIButton()
     
     var collectionView: UICollectionView!
     
@@ -39,18 +39,21 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         
         
-        leftWallCountLabel.frame = CGRect(x: 30, y: 100, width: 100, height: 50)
-        leftWallCountLabel.text = String(format: "のこり:%d", tiles.wall.count)
-        tsumoCountLabel.frame = CGRect(x: 150, y: 100, width: 100, height: 50)
-        tsumoCountLabel.text = String(format: "つも:%d", 136 - (hand.count + tiles.wall.count))
-        self.view.addSubview(leftWallCountLabel)
-        self.view.addSubview(tsumoCountLabel)
+        countLabel.frame = CGRect(x: 30, y: 100, width: 100, height: 50)
+        countLabel.text = String(format: "%d:%d", tiles.wall.count, 136 - (hand.count + tiles.wall.count))
+        self.view.addSubview(countLabel)
         
         resetButton.frame = CGRect(x: 30, y: 200, width: 100, height: 50)
         resetButton.setTitle("Reset", forState: .Normal)
-        resetButton.backgroundColor = .greenColor()
+        resetButton.backgroundColor = .redColor()
         resetButton.addTarget(self, action: #selector(ViewController.resetWall), forControlEvents: .TouchUpInside)
         self.view.addSubview(resetButton)
+        
+        sortButton.frame = CGRect(x: 150, y: 200, width: 100, height: 50)
+        sortButton.setTitle("Sort", forState: .Normal)
+        sortButton.backgroundColor = .greenColor()
+        sortButton.addTarget(self, action: #selector(ViewController.sortHand), forControlEvents: .TouchUpInside)
+        self.view.addSubview(sortButton)
         
         
         
@@ -88,8 +91,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         hand.insert(tsumo, atIndex: hand.count)
         
         
-        leftWallCountLabel.text = String(format: "のこり:%d", tiles.wall.count)
-        tsumoCountLabel.text = String(format: "つも:%d", 136 - (hand.count + tiles.wall.count))
+        countLabel.text = String(format: "%d:%d", tiles.wall.count, 136 - (hand.count + tiles.wall.count))
         
         
         let cell = collectionView.cellForItemAtIndexPath(indexPath)
@@ -133,13 +135,21 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         for _ in 0 ..< handCount {
             let tsumo = tiles.wall.removeLast()
             hand.append(tsumo)
-            print(tsumo.string)
         }
         
-        leftWallCountLabel.text = String(format: "のこり:%d", tiles.wall.count)
-        tsumoCountLabel.text = String(format: "つも:%d", 136 - (hand.count + tiles.wall.count))
+        countLabel.text = String(format: "%d:%d", tiles.wall.count, 136 - (hand.count + tiles.wall.count))
         
         // reset collection view
+        collectionView.reloadData()
+    }
+    
+    func sortHand() {
+        hand.sortInPlace({(t1, t2) -> Bool in
+            if t1.type.rawValue != t2.type.rawValue {
+                return t1.type.rawValue < t2.type.rawValue
+            }
+            return t1.number < t2.number
+        })
         collectionView.reloadData()
     }
 
