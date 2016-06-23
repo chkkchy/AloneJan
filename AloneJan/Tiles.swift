@@ -47,13 +47,25 @@ class Tiles {
         Tile(type: TileType.Characters, string: "九", image: "man9-66-90-s-emb.png", number: 9)
     ]
     
-    var wall = [Tile]()
+    var stack: [Tile]
     
     init() {
+        stack = []
         for _ in 0..<4 {
-            self.wall += Tiles.tiles
+            stack += Tiles.tiles
         }
-        ArrayUtils.shuffle(&wall)
+        ArrayUtils.shuffle(&stack)
     }
     
+    func reset() {
+        stack = []
+        for _ in 0..<4 {
+            stack += Tiles.tiles
+        }
+        ArrayUtils.shuffle(&stack)
+    }
+    
+    func isStackEmpty() -> Bool {
+       return stack.count == 0
+    }
 }

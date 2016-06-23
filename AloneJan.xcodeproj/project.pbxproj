@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F13A99B51D1BC12A00F6DE83 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13A99B41D1BC12A00F6DE83 /* Player.swift */; };
 		F18064651D1A51D000800D29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18064641D1A51D000800D29 /* AppDelegate.swift */; };
 		F18064671D1A51D000800D29 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18064661D1A51D000800D29 /* ViewController.swift */; };
 		F180646A1D1A51D000800D29 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F18064681D1A51D000800D29 /* Main.storyboard */; };
@@ -109,6 +110,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F13A99B41D1BC12A00F6DE83 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		F18064611D1A51D000800D29 /* AloneJan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AloneJan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F18064641D1A51D000800D29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F18064661D1A51D000800D29 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				F180649B1D1A668F00800D29 /* TileType.swift */,
 				F18065031D1A7CD700800D29 /* TileImage.swift */,
 				F18064971D1A595200800D29 /* ArrayUtils.swift */,
+				F13A99B41D1BC12A00F6DE83 /* Player.swift */,
 				F18064681D1A51D000800D29 /* Main.storyboard */,
 				F180646E1D1A51D000800D29 /* Assets.xcassets */,
 				F18064701D1A51D000800D29 /* LaunchScreen.storyboard */,
@@ -494,6 +497,7 @@
 				F18064961D1A53B200800D29 /* Tile.swift in Sources */,
 				F180649C1D1A668F00800D29 /* TileType.swift in Sources */,
 				F18065041D1A7CD700800D29 /* TileImage.swift in Sources */,
+				F13A99B51D1BC12A00F6DE83 /* Player.swift in Sources */,
 				F18065071D1A82AD00800D29 /* Tiles.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -727,6 +731,7 @@
 				F180648E1D1A51D000800D29 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F180648F1D1A51D000800D29 /* Build configuration list for PBXNativeTarget "AloneJanTests" */ = {
 			isa = XCConfigurationList;
@@ -735,6 +740,7 @@
 				F18064911D1A51D000800D29 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F18064921D1A51D000800D29 /* Build configuration list for PBXNativeTarget "AloneJanUITests" */ = {
 			isa = XCConfigurationList;
@@ -743,6 +749,7 @@
 				F18064941D1A51D000800D29 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

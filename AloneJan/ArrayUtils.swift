@@ -10,7 +10,7 @@ import Foundation
 
 class ArrayUtils {
     
-    // destructive
+    // destructive method
     static func shuffle<T>(inout array: [T]) {
         for i in 0..<array.count {
             let j = Int(arc4random_uniform(UInt32(array.count)))
@@ -20,7 +20,7 @@ class ArrayUtils {
         }
     }
     
-    // undestructive
+    // undestructive method
     static func shuffled<S: SequenceType>(source: S) -> [S.Generator.Element] {
         var copy = Array<S.Generator.Element>(source)
         shuffle(&copy)
