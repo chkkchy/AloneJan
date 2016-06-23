@@ -93,8 +93,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func resetStack() {
-        player.reset()
         tiles.reset()
+        player.reset()
+        player.drawFrom(&tiles.stack, count: handCount)
         updateCountLabel()
         collectionView.reloadData()
     }
@@ -105,7 +106,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
 
     func updateCountLabel() {
-        countLabel.text = String(format: "%d:%d", tiles.stack.count, 136 - (player.hand.count + tiles.stack.count))
+        countLabel.text = String(format: "%d : %d", tiles.stack.count, 136 - (player.hand.count + tiles.stack.count))
     }
 }
 
