@@ -38,8 +38,4 @@ class Player {
         })
     }
     
-    func reset() {
-        self.hand = []
-    }
-    
 }

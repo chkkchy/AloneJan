@@ -22,15 +22,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     var collectionView: UICollectionView!
     
-    var tiles = Field()
+    var field = Field()
     let player = Player()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        player.drawFrom(&tiles.stack, count: handCount)
-        
+        player.drawFrom(&field.stack, count: handCount)
         
         countLabel = UILabel(frame: CGRect(x: 30, y: 100, width: screenWidth, height: 50))
         updateCountLabel()
@@ -43,13 +42,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         resetButton = UIButton(frame: CGRect(x: 30, y: 200, width: 100, height: 50))
         resetButton.setTitle("Reset", forState: .Normal)
         resetButton.backgroundColor = .redColor()
-        resetButton.addTarget(self, action: #selector(ViewController.resetStack), forControlEvents: .TouchUpInside)
+        resetButton.addTarget(self, action: #selector(ViewController.tappedResetButton), forControlEvents: .TouchUpInside)
         self.view.addSubview(resetButton)
         
         sortButton = UIButton(frame: CGRect(x: 150, y: 200, width: 100, height: 50))
         sortButton.setTitle("Sort", forState: .Normal)
         sortButton.backgroundColor = .greenColor()
-        sortButton.addTarget(self, action: #selector(ViewController.sortHand), forControlEvents: .TouchUpInside)
+        sortButton.addTarget(self, action: #selector(ViewController.tappedSortButton), forControlEvents: .TouchUpInside)
         self.view.addSubview(sortButton)
         
         // :TODO
@@ -75,11 +74,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if tiles.stack.isEmpty {
+        if field.isTerminalOfStack {
             return
         }
         player.discardHand(indexPath.row)
-        player.drawFrom(&tiles.stack)
+        player.drawFrom(&field.stack)
         updateCountLabel()
         collectionView.reloadData()
     }
@@ -97,37 +96,29 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return cell
     }
     
-    func resetStack() {
-        tiles.reset()
-        player.reset()
-        player.drawFrom(&tiles.stack, count: handCount)
+    func tappedResetButton() {
+        field = Field()
+        player.hand = []
+        player.drawFrom(&field.stack, count: handCount)
         updateCountLabel()
         updateConditionLabel()
         collectionView.reloadData()
     }
     
-    func sortHand() {
+    func tappedSortButton() {
         player.sortHand()
         collectionView.reloadData()
     }
 
     func updateCountLabel() {
-        countLabel.text = String(format: "%d : %d", tiles.stack.count, 136 - (player.hand.count + tiles.stack.count))
+        countLabel.text = String(format: "%d : %d",
+                                 field.stack.count, 136 - (player.hand.count + field.stack.count))
     }
     
     func updateConditionLabel() {
-        var round = ""
-        switch tiles.round! {
-        case .East:
-            round = "東"
-        case .South:
-            round = "南"
-        default:
-            break
-
-        }
-        conditionLabel.text = String(format: "%@ %d局 %d本場 供託: %d ドラ: %@", round, tiles.hand, tiles.honba, tiles.deposit, tiles.dora.string)
+        print(field.round)
+        conditionLabel.text = String(format: "%@ %d局 %d本場 供託: %d ドラ: %@",
+                                     field.round.description, field.hand, field.honba, field.deposit, field.dora.string)
     }
     
 }
-

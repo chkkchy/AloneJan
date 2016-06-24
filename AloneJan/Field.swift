@@ -11,13 +11,13 @@ import Foundation
 class Field {
     
     static let tiles = [
-        Tile(type: TileType.Honours, string: "東", image: "ji1-66-90-s-emb.png", number: nil),
-        Tile(type: TileType.Honours, string: "南", image: "ji2-66-90-s-emb.png", number: nil),
-        Tile(type: TileType.Honours, string: "西", image: "ji3-66-90-s-emb.png", number: nil),
-        Tile(type: TileType.Honours, string: "北", image: "ji4-66-90-s-emb.png", number: nil),
-        Tile(type: TileType.Honours, string: "発", image: "ji5-66-90-s-emb.png", number: nil),
-        Tile(type: TileType.Honours, string: "白", image: "ji6-66-90-s-emb.png", number: nil),
-        Tile(type: TileType.Honours, string: "中", image: "ji7-66-90-s-emb.png", number: nil),
+        Tile(type: TileType.Honours, string: "東", image: "ji1-66-90-s-emb.png", number: 1),
+        Tile(type: TileType.Honours, string: "南", image: "ji2-66-90-s-emb.png", number: 2),
+        Tile(type: TileType.Honours, string: "西", image: "ji3-66-90-s-emb.png", number: 3),
+        Tile(type: TileType.Honours, string: "北", image: "ji4-66-90-s-emb.png", number: 4),
+        Tile(type: TileType.Honours, string: "発", image: "ji5-66-90-s-emb.png", number: 5),
+        Tile(type: TileType.Honours, string: "白", image: "ji6-66-90-s-emb.png", number: 6),
+        Tile(type: TileType.Honours, string: "中", image: "ji7-66-90-s-emb.png", number: 7),
         Tile(type: TileType.Circles, string: "①", image: "pin1-66-90-s-emb.png", number: 1),
         Tile(type: TileType.Circles, string: "②", image: "pin2-66-90-s-emb.png", number: 2),
         Tile(type: TileType.Circles, string: "③", image: "pin3-66-90-s-emb.png", number: 3),
@@ -63,6 +63,10 @@ class Field {
     
     var dora: Tile
     
+    var isTerminalOfStack: Bool {
+        return stack.count == deadStackCount
+    }
+    
     init() {
         round = WindType(rawValue: Int(arc4random_uniform(UInt32(2))) + 1)
         hand = Int(arc4random_uniform(UInt32(4))) + 1
@@ -70,24 +74,10 @@ class Field {
         deposit = (Int(arc4random_uniform(UInt32(2)))) * 1000
         stack = []
         for _ in 0..<4 {
-            stack += Tiles.tiles
+            stack += Field.tiles
         }
         ArrayUtils.shuffle(&stack)
-        deadStack = Array(stack[1...14])
-        dora = deadStack.first!
-    }
-    
-    func reset() {
-        round = WindType(rawValue: Int(arc4random_uniform(UInt32(2))) + 1)
-        hand = Int(arc4random_uniform(UInt32(4))) + 1
-        honba = Int(arc4random_uniform(UInt32(2)))
-        deposit = (Int(arc4random_uniform(UInt32(2)))) * 1000
-        stack = []
-        for _ in 0..<4 {
-            stack += Tiles.tiles
-        }
-        ArrayUtils.shuffle(&stack)
-        deadStack = Array(stack[1...14])
+        deadStack = Array(stack[0...(deadStackCount-1)])
         dora = deadStack.first!
     }
     

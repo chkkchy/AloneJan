@@ -16,9 +16,13 @@ class Tile {
     
     var image: String
     
-    var number: Int?
+    var number: Int
     
-    init(type: TileType, string: String, image: String, number: Int?) {
+    var isSuits: Bool {
+        return self.type != TileType.Honours
+    }
+    
+    init(type: TileType, string: String, image: String, number: Int) {
         self.type = type
         self.string = string
         self.image = image

@@ -10,6 +10,9 @@ import Foundation
 
 enum TileType: Int {
     
-    case Characters = 1, Circles, Bamboos, Honours
+    case Characters = 1
+    case Circles
+    case Bamboos
+    case Honours
     
 }

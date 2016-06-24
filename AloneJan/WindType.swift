@@ -8,8 +8,24 @@
 
 import Foundation
 
-enum WindType: Int {
+enum WindType: Int, CustomStringConvertible {
     
-    case None = 0, East = 1, South, West, North
+    case East = 1
+    case South
+    case West
+    case North
+    
+    var description: String {
+        switch self {
+        case .East:
+            return "東"
+        case .South:
+            return "南"
+        case .West:
+            return "西"
+        case .North:
+            return "北"
+        }
+    }
     
 }
