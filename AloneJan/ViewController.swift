@@ -30,24 +30,34 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        // TODO: このへん init() とかにまとめる
-        player = field.players[0] //field.players[Int(arc4random_uniform(UInt32(4)))]
+        self.title = "ホーム"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(ViewController.onClick))
+        self.view.backgroundColor = .whiteColor()
         
-        pointLabel = UILabel(frame: CGRect(x: 30, y: 100, width: screenWidth, height: 50))
+        // TODO: このへん init() とかにまとめる
+        player = field.players[0] //field.players[Int(arc4random_uniform(UInt32(4)))] 現状index out of rangeなっちゃう
+        
+        pointLabel = UILabel(frame: CGRect(x: 10, y: 100, width: screenWidth, height: 50))
         updatePointLabel()
         self.view.addSubview(pointLabel)
         
-        conditionLabel = UILabel(frame: CGRect(x: 30, y: 150, width: screenWidth, height: 50))
+        conditionLabel = UILabel(frame: CGRect(x: 10, y: 150, width: screenWidth, height: 50))
         updateConditionLabel()
         self.view.addSubview(conditionLabel)
         
-        countLabel = UILabel(frame: CGRect(x: 30, y: 200, width: screenWidth, height: 50))
+        countLabel = UILabel(frame: CGRect(x: 10, y: 200, width: screenWidth, height: 50))
         updateCountLabel()
         self.view.addSubview(countLabel)
         
-        resetButton = UIButton(frame: CGRect(x: 30, y: 250, width: 100, height: 50))
+        resetButton = UIButton(frame: CGRect(x: 10, y: 250, width: 100, height: 50))
         resetButton.setTitle("Reset", forState: .Normal)
+        resetButton.titleLabel!.font = UIFont(name: "Cochin-Bold", size: 20)
         resetButton.backgroundColor = .redColor()
+        resetButton.layer.cornerRadius = 10.0
+        resetButton.layer.borderColor = UIColor.lightGrayColor().CGColor
+        resetButton.layer.borderWidth = 1.0
+        resetButton.setTitleColor(.blackColor(), forState: .Normal)
+        resetButton.setTitleColor(.darkGrayColor(), forState: .Highlighted)
         resetButton.addTarget(self, action: #selector(ViewController.tappedResetButton), forControlEvents: .TouchUpInside)
         self.view.addSubview(resetButton)
         
@@ -59,15 +69,18 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         // :TODO
         let image = UIImage(named: "ji7-66-90-s-emb.png")
-        let w = (view.bounds.size.width - (14 * 2) - (2 * 2)) / 14
+        print("image", image?.size.width, image?.size.width)
+        print(view.bounds.size.width)
+        let w = (view.bounds.size.width - (0.5 * (14 + 1))) / 14
         let h = w / (image?.size.width)! * (image?.size.height)!
         
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSizeMake(w, h)
-        layout.minimumInteritemSpacing = 1.5
-        layout.sectionInset = UIEdgeInsetsMake((CGFloat(screenHeight/2)-h)/2, 0, 0, 0)
+        layout.minimumInteritemSpacing = 0.5
+        layout.sectionInset = UIEdgeInsetsMake(0, 0.5, 0, 0.5)
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-        collectionView.frame = CGRect(x: 0, y: screenHeight/2, width: screenWidth, height: screenHeight/2)
+        collectionView.backgroundColor = .whiteColor()
+        collectionView.frame = CGRect(x: 0, y: (screenHeight/3)*2, width: screenWidth, height: screenHeight/3)
         collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -117,7 +130,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
 
     func updatePointLabel() {
-        var text = ""
+        var text = String(format: "<%@家>", player.wind.description)
         for player in field.players {
             text += String(format: "%@:%d ", player.wind.description, player.point)
         }
@@ -130,6 +143,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func updateCountLabel() {
         countLabel.text = String(format: "[%d]", field.stack.count)
+    }
+    
+    func onClick() {
+        self.navigationController?.pushViewController(SettingViewController(), animated: true)
     }
     
 }

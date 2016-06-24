@@ -15,4 +15,19 @@ enum TileType: Int {
     case Bamboos
     case Honours
     
+    static let allValues = [Characters, Circles, Bamboos, Honours]
+    
+    var description: String {
+        switch self {
+        case .Characters:
+            return "萬子"
+        case .Circles:
+            return "筒子"
+        case .Bamboos:
+            return "索子"
+        case .Honours:
+            return "字牌"
+        }
+    }
+    
 }

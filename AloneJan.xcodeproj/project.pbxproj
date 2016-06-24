@@ -88,6 +88,7 @@
 		F18065001D1A7BA000800D29 /* pin2-66-90-s-emb.png in Resources */ = {isa = PBXBuildFile; fileRef = F18064EF1D1A7BA000800D29 /* pin2-66-90-s-emb.png */; };
 		F18065011D1A7BA000800D29 /* pin1-66-90-s-emb.png in Resources */ = {isa = PBXBuildFile; fileRef = F18064F01D1A7BA000800D29 /* pin1-66-90-s-emb.png */; };
 		F18065021D1A7BA000800D29 /* pin1-66-90-s-emb.png in Resources */ = {isa = PBXBuildFile; fileRef = F18064F01D1A7BA000800D29 /* pin1-66-90-s-emb.png */; };
+		F19F20C31D1D177A00DBE46E /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F20C21D1D177A00DBE46E /* SettingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,6 +163,7 @@
 		F18064EE1D1A7BA000800D29 /* pin3-66-90-s-emb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pin3-66-90-s-emb.png"; sourceTree = "<group>"; };
 		F18064EF1D1A7BA000800D29 /* pin2-66-90-s-emb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pin2-66-90-s-emb.png"; sourceTree = "<group>"; };
 		F18064F01D1A7BA000800D29 /* pin1-66-90-s-emb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pin1-66-90-s-emb.png"; sourceTree = "<group>"; };
+		F19F20C21D1D177A00DBE46E /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +217,7 @@
 				F180649D1D1A671D00800D29 /* Images */,
 				F18064641D1A51D000800D29 /* AppDelegate.swift */,
 				F18064661D1A51D000800D29 /* ViewController.swift */,
+				F19F20C21D1D177A00DBE46E /* SettingViewController.swift */,
 				F13A99B61D1BE1D300F6DE83 /* Field.swift */,
 				F18064951D1A53B200800D29 /* Tile.swift */,
 				F180649B1D1A668F00800D29 /* TileType.swift */,
@@ -493,6 +496,7 @@
 				F180646D1D1A51D000800D29 /* AloneJan.xcdatamodeld in Sources */,
 				F18064651D1A51D000800D29 /* AppDelegate.swift in Sources */,
 				F13A99B91D1BE50500F6DE83 /* WindType.swift in Sources */,
+				F19F20C31D1D177A00DBE46E /* SettingViewController.swift in Sources */,
 				F18064981D1A595200800D29 /* ArrayUtils.swift in Sources */,
 				F18064961D1A53B200800D29 /* Tile.swift in Sources */,
 				F180649C1D1A668F00800D29 /* TileType.swift in Sources */,
