@@ -10,11 +10,17 @@ import Foundation
 
 class Player {
     
+    var wind: WindType
+    
+    var point: Int
+    
     var hand: [Tile]
     
     var tsumo: Tile?
     
-    init() {
+    init(wind: WindType, point: Int = 25000) {
+        self.wind = wind
+        self.point = point
         self.hand = []
     }
     

@@ -15,37 +15,43 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     let handCount = 14
 
-    var countLabel: UILabel!
+    var pointLabel: UILabel!
     var conditionLabel: UILabel!
+    var countLabel: UILabel!
     var resetButton: UIButton!
     var sortButton: UIButton!
     
     var collectionView: UICollectionView!
     
     var field = Field()
-    let player = Player()
+    var player: Player!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        player.drawFrom(&field.stack, count: handCount)
+        // TODO: このへん init() とかにまとめる
+        player = field.players[0] //field.players[Int(arc4random_uniform(UInt32(4)))]
         
-        countLabel = UILabel(frame: CGRect(x: 30, y: 100, width: screenWidth, height: 50))
-        updateCountLabel()
-        self.view.addSubview(countLabel)
+        pointLabel = UILabel(frame: CGRect(x: 30, y: 100, width: screenWidth, height: 50))
+        updatePointLabel()
+        self.view.addSubview(pointLabel)
         
         conditionLabel = UILabel(frame: CGRect(x: 30, y: 150, width: screenWidth, height: 50))
         updateConditionLabel()
         self.view.addSubview(conditionLabel)
         
-        resetButton = UIButton(frame: CGRect(x: 30, y: 200, width: 100, height: 50))
+        countLabel = UILabel(frame: CGRect(x: 30, y: 200, width: screenWidth, height: 50))
+        updateCountLabel()
+        self.view.addSubview(countLabel)
+        
+        resetButton = UIButton(frame: CGRect(x: 30, y: 250, width: 100, height: 50))
         resetButton.setTitle("Reset", forState: .Normal)
         resetButton.backgroundColor = .redColor()
         resetButton.addTarget(self, action: #selector(ViewController.tappedResetButton), forControlEvents: .TouchUpInside)
         self.view.addSubview(resetButton)
         
-        sortButton = UIButton(frame: CGRect(x: 150, y: 200, width: 100, height: 50))
+        sortButton = UIButton(frame: CGRect(x: 150, y: 250, width: 100, height: 50))
         sortButton.setTitle("Sort", forState: .Normal)
         sortButton.backgroundColor = .greenColor()
         sortButton.addTarget(self, action: #selector(ViewController.tappedSortButton), forControlEvents: .TouchUpInside)
@@ -74,7 +80,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if field.isTerminalOfStack {
+        if field.stack.isEmpty {
             return
         }
         player.discardHand(indexPath.row)
@@ -98,10 +104,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func tappedResetButton() {
         field = Field()
-        player.hand = []
-        player.drawFrom(&field.stack, count: handCount)
-        updateCountLabel()
+        player = field.players[0] //field.players[Int(arc4random_uniform(UInt32(4)))]
+        updatePointLabel()
         updateConditionLabel()
+        updateCountLabel()
         collectionView.reloadData()
     }
     
@@ -110,14 +116,20 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         collectionView.reloadData()
     }
 
-    func updateCountLabel() {
-        countLabel.text = String(format: "%d : %d",
-                                 field.stack.count, 136 - (player.hand.count + field.stack.count))
+    func updatePointLabel() {
+        var text = ""
+        for player in field.players {
+            text += String(format: "%@:%d ", player.wind.description, player.point)
+        }
+        pointLabel.text = text
     }
     
     func updateConditionLabel() {
-        conditionLabel.text = String(format: "%@ %d局 %d本場 供託: %d ドラ: %@",
-                                     field.round.description, field.hand, field.honba, field.deposit, field.dora.string)
+        conditionLabel.text = String(format: "%@ %d局 %d本場 供託: %d ドラ: %@", field.round.description, field.hand, field.honba, field.deposit, field.dora.string)
+    }
+    
+    func updateCountLabel() {
+        countLabel.text = String(format: "[%d]", field.stack.count)
     }
     
 }

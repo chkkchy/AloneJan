@@ -63,22 +63,50 @@ class Field {
     
     var dora: Tile
     
-    var isTerminalOfStack: Bool {
-        return stack.count == deadStackCount
-    }
+    var players: [Player]
+    
+//    var isTerminalOfStack: Bool {
+//        return stack.count == deadStackCount
+//    }
     
     init() {
         round = WindType(rawValue: Int(arc4random_uniform(UInt32(2))) + 1)
         hand = Int(arc4random_uniform(UInt32(4))) + 1
         honba = Int(arc4random_uniform(UInt32(3)))
-        deposit = (Int(arc4random_uniform(UInt32(3)))) * 1000
+        deposit = (Int(arc4random_uniform(UInt32(3)))) * 1000 // TODO player.pointと帳尻合わす
         stack = []
         for _ in 0..<4 {
             stack += Field.tiles
         }
         ArrayUtils.shuffle(&stack)
-        deadStack = Array(stack[0...(deadStackCount-1)])
+        deadStack = Array(stack[1...deadStackCount])
+        stack[1...deadStackCount] = []
         dora = deadStack.first!
+        players = [
+            Player(wind: .East),
+            Player(wind: .South),
+            Player(wind: .West),
+            Player(wind: .North)
+        ]
+        for player in players {
+            var drawCount = 13
+            if player.wind == .East {
+                drawCount += 1
+            }
+            player.drawFrom(&stack, count: drawCount)
+        }
+        stirPlayersPoint()
+    }
+    
+    func stirPlayersPoint() {
+        for i in 1...30 {
+            let pt = i * 100
+            var rnds = [Int](0..<4)
+            ArrayUtils.shuffle(&rnds)
+            let from = players[rnds.removeLast()]
+            let to = players[rnds.removeLast()]
+            from.point -= pt; to.point += pt
+        }
     }
     
 }
