@@ -70,8 +70,8 @@ class Field {
     init() {
         round = WindType(rawValue: Int(arc4random_uniform(UInt32(2))) + 1)
         hand = Int(arc4random_uniform(UInt32(4))) + 1
-        honba = Int(arc4random_uniform(UInt32(2)))
-        deposit = (Int(arc4random_uniform(UInt32(2)))) * 1000
+        honba = Int(arc4random_uniform(UInt32(3)))
+        deposit = (Int(arc4random_uniform(UInt32(3)))) * 1000
         stack = []
         for _ in 0..<4 {
             stack += Field.tiles

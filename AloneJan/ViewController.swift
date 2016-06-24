@@ -116,7 +116,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func updateConditionLabel() {
-        print(field.round)
         conditionLabel.text = String(format: "%@ %d局 %d本場 供託: %d ドラ: %@",
                                      field.round.description, field.hand, field.honba, field.deposit, field.dora.string)
     }
