@@ -15,20 +15,63 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     let handCount = 14
 
-    var pointLabel: UILabel!
-    var conditionLabel: UILabel!
-    var countLabel: UILabel!
-    var resetButton: UIButton!
-    var sortButton: UIButton!
+    private let pointLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
     
-    var collectionView: UICollectionView!
+    private let conditionLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    
+    private let countLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    
+    private let resetButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Reset", forState: .Normal)
+        button.titleLabel!.font = UIFont(name: "Cochin-Bold", size: 20)
+        button.backgroundColor = .redColor()
+        button.layer.cornerRadius = 10.0
+        button.layer.borderColor = UIColor.lightGrayColor().CGColor
+        button.layer.borderWidth = 1.0
+        button.setTitleColor(.blackColor(), forState: .Normal)
+        button.setTitleColor(.darkGrayColor(), forState: .Highlighted)
+        return button
+    }()
+    
+    private let sortButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Sort", forState: .Normal)
+        button.backgroundColor = .greenColor()
+        return button
+    }()
+    
+    private let collectionView: UICollectionView = {
+        let imageWidth: CGFloat = 32.0 // Fixed size
+        let imageHeight: CGFloat = 45.0 // Fixed size
+        let margin: CGFloat = 0.5
+        let width = (UIScreen.mainScreen().bounds.size.width - (margin * (14 + 1))) / 14
+        let height = width / imageWidth * imageHeight
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSizeMake(width, height)
+        layout.minimumInteritemSpacing = margin
+        layout.sectionInset = UIEdgeInsetsMake(0, margin, 0, margin)
+        let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .whiteColor()
+        collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        return collectionView
+    }()
     
     var field = Field()
     var player: Player!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
         self.title = "ホーム"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(ViewController.onClick))
@@ -37,54 +80,29 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         // TODO: このへん init() とかにまとめる
         player = field.players[0] //field.players[Int(arc4random_uniform(UInt32(4)))] 現状index out of rangeなっちゃう
         
-        pointLabel = UILabel(frame: CGRect(x: 10, y: 100, width: screenWidth, height: 50))
         updatePointLabel()
-        self.view.addSubview(pointLabel)
-        
-        conditionLabel = UILabel(frame: CGRect(x: 10, y: 150, width: screenWidth, height: 50))
         updateConditionLabel()
-        self.view.addSubview(conditionLabel)
-        
-        countLabel = UILabel(frame: CGRect(x: 10, y: 200, width: screenWidth, height: 50))
         updateCountLabel()
-        self.view.addSubview(countLabel)
-        
-        resetButton = UIButton(frame: CGRect(x: 10, y: 250, width: 100, height: 50))
-        resetButton.setTitle("Reset", forState: .Normal)
-        resetButton.titleLabel!.font = UIFont(name: "Cochin-Bold", size: 20)
-        resetButton.backgroundColor = .redColor()
-        resetButton.layer.cornerRadius = 10.0
-        resetButton.layer.borderColor = UIColor.lightGrayColor().CGColor
-        resetButton.layer.borderWidth = 1.0
-        resetButton.setTitleColor(.blackColor(), forState: .Normal)
-        resetButton.setTitleColor(.darkGrayColor(), forState: .Highlighted)
         resetButton.addTarget(self, action: #selector(ViewController.tappedResetButton), forControlEvents: .TouchUpInside)
-        self.view.addSubview(resetButton)
-        
-        sortButton = UIButton(frame: CGRect(x: 150, y: 250, width: 100, height: 50))
-        sortButton.setTitle("Sort", forState: .Normal)
-        sortButton.backgroundColor = .greenColor()
         sortButton.addTarget(self, action: #selector(ViewController.tappedSortButton), forControlEvents: .TouchUpInside)
-        self.view.addSubview(sortButton)
-        
-        // :TODO
-        let image = UIImage(named: "ji7-66-90-s-emb.png")
-        print("image", image?.size.width, image?.size.width)
-        print(view.bounds.size.width)
-        let w = (view.bounds.size.width - (0.5 * (14 + 1))) / 14
-        let h = w / (image?.size.width)! * (image?.size.height)!
-        
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSizeMake(w, h)
-        layout.minimumInteritemSpacing = 0.5
-        layout.sectionInset = UIEdgeInsetsMake(0, 0.5, 0, 0.5)
-        collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-        collectionView.backgroundColor = .whiteColor()
-        collectionView.frame = CGRect(x: 0, y: (screenHeight/3)*2, width: screenWidth, height: screenHeight/3)
-        collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        self.view.addSubview(pointLabel)
+        self.view.addSubview(conditionLabel)
+        self.view.addSubview(countLabel)
+        self.view.addSubview(resetButton)
+        self.view.addSubview(sortButton)
         self.view.addSubview(collectionView)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        pointLabel.frame     = CGRect(x: 10, y: 100, width: screenWidth, height: 50)
+        conditionLabel.frame = CGRect(x: 10, y: 150, width: screenWidth, height: 50)
+        countLabel.frame     = CGRect(x: 10, y: 200, width: screenWidth, height: 50)
+        resetButton.frame    = CGRect(x: 10, y: 250, width: 100, height: 50)
+        sortButton.frame     = CGRect(x: 150, y: 250, width: 100, height: 50)
+        collectionView.frame = CGRect(x: 0, y: (screenHeight/3)*2, width: screenWidth, height: screenHeight/3)
     }
 
     override func didReceiveMemoryWarning() {
@@ -130,7 +148,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
 
     func updatePointLabel() {
-        var text = String(format: "<%@家>", player.wind.description)
+        var text = ""
         for player in field.players {
             text += String(format: "%@:%d ", player.wind.description, player.point)
         }
@@ -138,7 +156,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func updateConditionLabel() {
-        conditionLabel.text = String(format: "%@ %d局 %d本場 供託: %d ドラ: %@", field.round.description, field.hand, field.honba, field.deposit, field.dora.string)
+        conditionLabel.text = String(format: "%@%d局 %@家 %d本場 供託: %d ドラ: %@", field.round.description, field.hand, player.wind.description, field.honba, field.deposit, field.dora.string)
     }
     
     func updateCountLabel() {
