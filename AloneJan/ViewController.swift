@@ -13,7 +13,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     private let screenWidth = Double(UIScreen.mainScreen().bounds.size.width)
     private let screenHeight = Double(UIScreen.mainScreen().bounds.size.height)
     
-    private let handCount = 14
+    private let maxHandCount = 14
+    private let defaultPlayerCount = 4
+    
+    private let handCollectionViewCellReuseId = "hand"
+    private let disgardedCollectionViewCellReuseId = "disgarded"
 
     private let pointLabel: UILabel = {
         let label = UILabel()
@@ -62,7 +66,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         layout.sectionInset = UIEdgeInsetsMake(0, margin, 0, margin)
         let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clearColor()
-        collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell_a")
         return collectionView
     }()
     
@@ -79,13 +82,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         layout.minimumLineSpacing = 1.5
         layout.sectionInset = UIEdgeInsetsMake(0, m, 0, m)
         let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
-        collectionView.backgroundColor = UIColor.cyanColor()
-        collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell_b")
+        collectionView.backgroundColor = .clearColor()
         return collectionView
     }()
     
     private var field: Field!
     private var player: Player!
+    private var playerId = 0
     
     
     override func viewDidLoad() {
@@ -99,8 +102,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         sortButton.addTarget(self, action: #selector(ViewController.tappedSortButton), forControlEvents: .TouchUpInside)
         handCollectionView.delegate = self
         handCollectionView.dataSource = self
+        handCollectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: handCollectionViewCellReuseId)
         disgardedCollectionView.delegate = self
         disgardedCollectionView.dataSource = self
+        disgardedCollectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: disgardedCollectionViewCellReuseId)
         
         self.view.addSubview(pointLabel)
         self.view.addSubview(conditionLabel)
@@ -131,34 +136,51 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         if collectionView.self == disgardedCollectionView {
             return
         }
-        if field.stack.isEmpty {
+        if player.hand.count < maxHandCount {
+            player.drawFrom(&field.stack)
+            handCollectionView.reloadData()
+            updateCountLabel()
             return
         }
         player.discardHand(indexPath.row)
-        player.drawFrom(&field.stack)
-        updateCountLabel()
         handCollectionView.reloadData()
         disgardedCollectionView.reloadData()
+        // other players draw
+        for i in 0..<defaultPlayerCount {
+            if i == playerId {
+                continue
+            }
+            field.players[i].drawFrom(&field.stack)
+            field.players[i].discardTsumo()
+            updateCountLabel()
+        }
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView.self == disgardedCollectionView {
+        switch collectionView.self {
+        case handCollectionView:
+            return player.hand.count
+        case disgardedCollectionView:
             return player.disgarded.count
+        default:
+            return 0
         }
-        return player.hand.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        if collectionView.self == disgardedCollectionView {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell_b", forIndexPath: indexPath) as UICollectionViewCell
-            let image = UIImage(named: player.disgarded[indexPath.row].image)
-            let imageView = UIImageView(image: image)
-            imageView.frame = cell.bounds
-            cell.contentView.addSubview(imageView)
-            return cell
+        var reuseIdentifier: String!
+        var image: UIImage!
+        switch collectionView.self {
+        case handCollectionView:
+            reuseIdentifier = handCollectionViewCellReuseId
+            image = UIImage(named: player.hand[indexPath.row].image)
+        case disgardedCollectionView:
+            reuseIdentifier = disgardedCollectionViewCellReuseId
+            image = UIImage(named: player.disgarded[indexPath.row].image)
+        default:
+            return UICollectionViewCell()
         }
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell_a", forIndexPath: indexPath) as UICollectionViewCell
-        let image = UIImage(named: player.hand[indexPath.row].image)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as UICollectionViewCell
         let imageView = UIImageView(image: image)
         imageView.frame = cell.bounds
         cell.contentView.addSubview(imageView)
@@ -199,7 +221,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func reset() {
         field = Field()
-        player = field.players[Int(arc4random_uniform(UInt32(4)))]
+        playerId = Int(arc4random_uniform(UInt32(defaultPlayerCount)))
+        player = field.players[playerId]
+        // other players draw
+        for i in 0..<defaultPlayerCount {
+            if field.players[i].wind.rawValue < player.wind.rawValue {
+                field.players[i].drawFrom(&field.stack)
+                field.players[i].discardTsumo()
+            }
+        }
         updatePointLabel()
         updateConditionLabel()
         updateCountLabel()

@@ -28,6 +28,9 @@ class Player {
     }
     
     func drawFrom(inout stack: [Tile], count: Int = 1) {
+        if stack.isEmpty {
+            return
+        }
         for _ in 0 ..< count {
             tsumo = stack.removeLast()
             hand.append(tsumo!)
@@ -36,6 +39,10 @@ class Player {
     
     func discardHand(index: Int) {
         self.disgarded.append(hand.removeAtIndex(index))
+    }
+    
+    func discardTsumo() {
+        self.disgarded.append(hand.removeLast())
     }
     
     func sortHand() {
