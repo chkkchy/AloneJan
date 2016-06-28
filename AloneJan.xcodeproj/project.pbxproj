@@ -89,7 +89,6 @@
 		F18065011D1A7BA000800D29 /* pin1-66-90-s-emb.png in Resources */ = {isa = PBXBuildFile; fileRef = F18064F01D1A7BA000800D29 /* pin1-66-90-s-emb.png */; };
 		F18065021D1A7BA000800D29 /* pin1-66-90-s-emb.png in Resources */ = {isa = PBXBuildFile; fileRef = F18064F01D1A7BA000800D29 /* pin1-66-90-s-emb.png */; };
 		F19F20C31D1D177A00DBE46E /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F20C21D1D177A00DBE46E /* SettingViewController.swift */; };
-		F19F20C71D223AE600DBE46E /* HandCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F20C61D223AE600DBE46E /* HandCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,7 +164,6 @@
 		F18064EF1D1A7BA000800D29 /* pin2-66-90-s-emb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pin2-66-90-s-emb.png"; sourceTree = "<group>"; };
 		F18064F01D1A7BA000800D29 /* pin1-66-90-s-emb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pin1-66-90-s-emb.png"; sourceTree = "<group>"; };
 		F19F20C21D1D177A00DBE46E /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
-		F19F20C61D223AE600DBE46E /* HandCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,10 +221,9 @@
 				F13A99B61D1BE1D300F6DE83 /* Field.swift */,
 				F18064951D1A53B200800D29 /* Tile.swift */,
 				F180649B1D1A668F00800D29 /* TileType.swift */,
+				F13A99B81D1BE50500F6DE83 /* WindType.swift */,
 				F18064971D1A595200800D29 /* ArrayUtils.swift */,
 				F13A99B41D1BC12A00F6DE83 /* Player.swift */,
-				F13A99B81D1BE50500F6DE83 /* WindType.swift */,
-				F19F20C61D223AE600DBE46E /* HandCollectionView.swift */,
 				F18064681D1A51D000800D29 /* Main.storyboard */,
 				F180646E1D1A51D000800D29 /* Assets.xcassets */,
 				F18064701D1A51D000800D29 /* LaunchScreen.storyboard */,
@@ -497,7 +494,6 @@
 				F13A99B71D1BE1D300F6DE83 /* Field.swift in Sources */,
 				F18064671D1A51D000800D29 /* ViewController.swift in Sources */,
 				F180646D1D1A51D000800D29 /* AloneJan.xcdatamodeld in Sources */,
-				F19F20C71D223AE600DBE46E /* HandCollectionView.swift in Sources */,
 				F18064651D1A51D000800D29 /* AppDelegate.swift in Sources */,
 				F13A99B91D1BE50500F6DE83 /* WindType.swift in Sources */,
 				F19F20C31D1D177A00DBE46E /* SettingViewController.swift in Sources */,

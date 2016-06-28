@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum TileType: Int {
+enum TileType: Int, CustomStringConvertible {
     
     case Characters = 1
     case Circles

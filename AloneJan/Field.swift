@@ -49,6 +49,8 @@ class Field {
     
     let deadStackCount = 14
     
+    let defaultHandCount = 13
+    
     var round: WindType!
     
     var hand: Int
@@ -89,8 +91,7 @@ class Field {
             Player(wind: .North)
         ]
         for player in players {
-            let drawCount = 13 // TODO: as default def?
-            player.drawFrom(&stack, count: drawCount)
+            player.drawFrom(&stack, count: defaultHandCount)
         }
         stirPlayersPoint()
     }

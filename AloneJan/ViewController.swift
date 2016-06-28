@@ -17,40 +17,40 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     private let defaultPlayerCount = 4
     
     private let handCollectionViewCellReuseId = "hand"
-    private let disgardedCollectionViewCellReuseId = "disgarded"
-
-    private let pointLabel: UILabel = {
-        let label = UILabel()
-        return label
-    }()
+    private let discardedCollectionViewCellReuseId = "discarded"
     
     private let conditionLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 2
+        label.font = UIFont(name: "Verdana-Bold", size: 15)
         return label
     }()
     
     private let countLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont(name: "Verdana-Bold", size: 15)
         return label
     }()
     
     private let resetButton: UIButton = {
         let button = UIButton()
         button.setTitle("Reset", forState: .Normal)
-        button.titleLabel!.font = UIFont(name: "Cochin-Bold", size: 20)
-        button.backgroundColor = .redColor()
-        button.layer.cornerRadius = 10.0
-        button.layer.borderColor = UIColor.lightGrayColor().CGColor
-        button.layer.borderWidth = 1.0
-        button.setTitleColor(.blackColor(), forState: .Normal)
-        button.setTitleColor(.darkGrayColor(), forState: .Highlighted)
+        button.titleLabel!.font = UIFont(name: "Verdana-Bold", size: 15)
+        button.layer.cornerRadius = 3.0
+        button.backgroundColor = .darkGrayColor()
+        button.setTitleColor(.whiteColor(), forState: .Normal)
+        button.setTitleColor(.lightGrayColor(), forState: .Highlighted)
         return button
     }()
     
     private let sortButton: UIButton = {
         let button = UIButton()
         button.setTitle("Sort", forState: .Normal)
-        button.backgroundColor = .greenColor()
+        button.titleLabel!.font = UIFont(name: "Verdana-Bold", size: 15)
+        button.layer.cornerRadius = 3.0
+        button.backgroundColor = .darkGrayColor()
+        button.setTitleColor(.whiteColor(), forState: .Normal)
+        button.setTitleColor(.lightGrayColor(), forState: .Highlighted)
         return button
     }()
     
@@ -63,13 +63,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSizeMake(width, height)
         layout.minimumInteritemSpacing = margin
-        layout.sectionInset = UIEdgeInsetsMake(0, margin, 0, margin)
+        layout.sectionInset = UIEdgeInsetsMake(5, margin, 0, margin)
         let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .clearColor()
+        collectionView.backgroundColor = .darkGrayColor()
         return collectionView
     }()
     
-    private let disgardedCollectionView: UICollectionView = {
+    private let discardedCollectionView: UICollectionView = {
         let imageWidth: CGFloat = 32.0 // Fixed size
         let imageHeight: CGFloat = 45.0 // Fixed size
         let margin: CGFloat = 0.5
@@ -80,9 +80,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         layout.itemSize = CGSizeMake(width, height)
         layout.minimumInteritemSpacing = 1.5
         layout.minimumLineSpacing = 1.5
-        layout.sectionInset = UIEdgeInsetsMake(0, m, 0, m)
+        layout.sectionInset = UIEdgeInsetsMake(5, m, 0, m)
         let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .clearColor()
+        collectionView.backgroundColor = .grayColor()
         return collectionView
     }()
     
@@ -103,29 +103,27 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         handCollectionView.delegate = self
         handCollectionView.dataSource = self
         handCollectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: handCollectionViewCellReuseId)
-        disgardedCollectionView.delegate = self
-        disgardedCollectionView.dataSource = self
-        disgardedCollectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: disgardedCollectionViewCellReuseId)
+        discardedCollectionView.delegate = self
+        discardedCollectionView.dataSource = self
+        discardedCollectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: discardedCollectionViewCellReuseId)
         
-        self.view.addSubview(pointLabel)
         self.view.addSubview(conditionLabel)
         self.view.addSubview(countLabel)
         self.view.addSubview(resetButton)
         self.view.addSubview(sortButton)
         self.view.addSubview(handCollectionView)
-        self.view.addSubview(disgardedCollectionView)
+        self.view.addSubview(discardedCollectionView)
         
         reset()
     }
     
     override func viewDidLayoutSubviews() {
-        pointLabel.frame     = CGRect(x: 10, y: 100, width: screenWidth, height: 50)
-        conditionLabel.frame = CGRect(x: 10, y: 150, width: screenWidth, height: 50)
+        conditionLabel.frame = CGRect(x: 10, y: 100, width: screenWidth, height: 50)
         countLabel.frame     = CGRect(x: 10, y: 200, width: screenWidth, height: 50)
         resetButton.frame    = CGRect(x: 10, y: 250, width: 100, height: 50)
         sortButton.frame     = CGRect(x: 150, y: 250, width: 100, height: 50)
-        handCollectionView.frame = CGRect(x: 0, y: (screenHeight/4)*3, width: screenWidth, height: screenHeight/4)
-        disgardedCollectionView.frame = CGRect(x: 0, y: screenHeight/2, width: screenWidth, height: screenHeight/4)
+        handCollectionView.frame = CGRect(x: 0, y: (screenHeight/6)*5, width: screenWidth, height: screenHeight/4)
+        discardedCollectionView.frame = CGRect(x: 0, y: screenHeight/2, width: screenWidth, height: screenHeight/4)
     }
 
     override func didReceiveMemoryWarning() {
@@ -133,7 +131,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if collectionView.self == disgardedCollectionView {
+        if collectionView.self == discardedCollectionView {
             return
         }
         if player.hand.count < maxHandCount {
@@ -144,7 +142,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
         player.discardHand(indexPath.row)
         handCollectionView.reloadData()
-        disgardedCollectionView.reloadData()
+        discardedCollectionView.reloadData()
         // other players draw
         for i in 0..<defaultPlayerCount {
             if i == playerId {
@@ -160,8 +158,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         switch collectionView.self {
         case handCollectionView:
             return player.hand.count
-        case disgardedCollectionView:
-            return player.disgarded.count
+        case discardedCollectionView:
+            return player.discarded.count
         default:
             return 0
         }
@@ -174,9 +172,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         case handCollectionView:
             reuseIdentifier = handCollectionViewCellReuseId
             image = UIImage(named: player.hand[indexPath.row].image)
-        case disgardedCollectionView:
-            reuseIdentifier = disgardedCollectionViewCellReuseId
-            image = UIImage(named: player.disgarded[indexPath.row].image)
+        case discardedCollectionView:
+            reuseIdentifier = discardedCollectionViewCellReuseId
+            image = UIImage(named: player.discarded[indexPath.row].image)
         default:
             return UICollectionViewCell()
         }
@@ -196,17 +194,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         handCollectionView.reloadData()
     }
 
-    func updatePointLabel() {
+    func updateConditionLabel() {
         var text = ""
         for player in field.players {
             text += String(format: "%@:%d ", player.wind.description, player.point)
         }
-        pointLabel.text = text
-    }
-    
-    func updateConditionLabel() {
         conditionLabel.text = String(
-            format: "%@%d局 %@家 %d本場 供託: %d ドラ: %@",
+            format: "%@\n%@%d局 %@家 %d本場 供託: %d ドラ: %@", text,
             field.round.description, field.hand, player.wind.description, field.honba, field.deposit, field.dora.string
         )
     }
@@ -225,16 +219,16 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         player = field.players[playerId]
         // other players draw
         for i in 0..<defaultPlayerCount {
-            if field.players[i].wind.rawValue < player.wind.rawValue {
-                field.players[i].drawFrom(&field.stack)
-                field.players[i].discardTsumo()
+            let other = field.players[i]
+            if other.wind.rawValue < player.wind.rawValue {
+                other.drawFrom(&field.stack)
+                other.discardTsumo()
             }
         }
-        updatePointLabel()
         updateConditionLabel()
         updateCountLabel()
         handCollectionView.reloadData()
-        disgardedCollectionView.reloadData()
+        discardedCollectionView.reloadData()
     }
 
 }
