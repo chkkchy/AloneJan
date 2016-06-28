@@ -50,7 +50,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return button
     }()
     
-    private let collectionView: UICollectionView = {
+    private let handCollectionView: UICollectionView = {
         let imageWidth: CGFloat = 32.0 // Fixed size
         let imageHeight: CGFloat = 45.0 // Fixed size
         let margin: CGFloat = 0.5
@@ -61,8 +61,26 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         layout.minimumInteritemSpacing = margin
         layout.sectionInset = UIEdgeInsetsMake(0, margin, 0, margin)
         let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .whiteColor()
-        collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.backgroundColor = .clearColor()
+        collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell_a")
+        return collectionView
+    }()
+    
+    private let disgardedCollectionView: UICollectionView = {
+        let imageWidth: CGFloat = 32.0 // Fixed size
+        let imageHeight: CGFloat = 45.0 // Fixed size
+        let margin: CGFloat = 0.5
+        let width = (UIScreen.mainScreen().bounds.size.width - (margin * (14 + 1))) / 14
+        let height = width / imageWidth * imageHeight
+        let m = (UIScreen.mainScreen().bounds.size.width - (width * 6 + 1.5 * 5)) / 2
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSizeMake(width, height)
+        layout.minimumInteritemSpacing = 1.5
+        layout.minimumLineSpacing = 1.5
+        layout.sectionInset = UIEdgeInsetsMake(0, m, 0, m)
+        let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
+        collectionView.backgroundColor = UIColor.cyanColor()
+        collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell_b")
         return collectionView
     }()
     
@@ -79,15 +97,18 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         resetButton.addTarget(self, action: #selector(ViewController.tappedResetButton), forControlEvents: .TouchUpInside)
         sortButton.addTarget(self, action: #selector(ViewController.tappedSortButton), forControlEvents: .TouchUpInside)
-        collectionView.delegate = self
-        collectionView.dataSource = self
+        handCollectionView.delegate = self
+        handCollectionView.dataSource = self
+        disgardedCollectionView.delegate = self
+        disgardedCollectionView.dataSource = self
         
         self.view.addSubview(pointLabel)
         self.view.addSubview(conditionLabel)
         self.view.addSubview(countLabel)
         self.view.addSubview(resetButton)
         self.view.addSubview(sortButton)
-        self.view.addSubview(collectionView)
+        self.view.addSubview(handCollectionView)
+        self.view.addSubview(disgardedCollectionView)
         
         reset()
     }
@@ -98,7 +119,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         countLabel.frame     = CGRect(x: 10, y: 200, width: screenWidth, height: 50)
         resetButton.frame    = CGRect(x: 10, y: 250, width: 100, height: 50)
         sortButton.frame     = CGRect(x: 150, y: 250, width: 100, height: 50)
-        collectionView.frame = CGRect(x: 0, y: (screenHeight/3)*2, width: screenWidth, height: screenHeight/3)
+        handCollectionView.frame = CGRect(x: 0, y: (screenHeight/4)*3, width: screenWidth, height: screenHeight/4)
+        disgardedCollectionView.frame = CGRect(x: 0, y: screenHeight/2, width: screenWidth, height: screenHeight/4)
     }
 
     override func didReceiveMemoryWarning() {
@@ -106,21 +128,36 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        if collectionView.self == disgardedCollectionView {
+            return
+        }
         if field.stack.isEmpty {
             return
         }
         player.discardHand(indexPath.row)
         player.drawFrom(&field.stack)
         updateCountLabel()
-        collectionView.reloadData()
+        handCollectionView.reloadData()
+        disgardedCollectionView.reloadData()
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return handCount
+        if collectionView.self == disgardedCollectionView {
+            return player.disgarded.count
+        }
+        return player.hand.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as UICollectionViewCell
+        if collectionView.self == disgardedCollectionView {
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell_b", forIndexPath: indexPath) as UICollectionViewCell
+            let image = UIImage(named: player.disgarded[indexPath.row].image)
+            let imageView = UIImageView(image: image)
+            imageView.frame = cell.bounds
+            cell.contentView.addSubview(imageView)
+            return cell
+        }
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell_a", forIndexPath: indexPath) as UICollectionViewCell
         let image = UIImage(named: player.hand[indexPath.row].image)
         let imageView = UIImageView(image: image)
         imageView.frame = cell.bounds
@@ -134,7 +171,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func tappedSortButton() {
         player.sortHand()
-        collectionView.reloadData()
+        handCollectionView.reloadData()
     }
 
     func updatePointLabel() {
@@ -166,7 +203,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         updatePointLabel()
         updateConditionLabel()
         updateCountLabel()
-        collectionView.reloadData()
+        handCollectionView.reloadData()
+        disgardedCollectionView.reloadData()
     }
 
 }

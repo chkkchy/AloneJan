@@ -16,12 +16,15 @@ class Player {
     
     var hand: [Tile]
     
+    var disgarded: [Tile]
+    
     var tsumo: Tile?
     
     init(wind: WindType, point: Int = 25000) {
         self.wind = wind
         self.point = point
         self.hand = []
+        self.disgarded = []
     }
     
     func drawFrom(inout stack: [Tile], count: Int = 1) {
@@ -32,7 +35,7 @@ class Player {
     }
     
     func discardHand(index: Int) {
-        hand.removeAtIndex(index)
+        self.disgarded.append(hand.removeAtIndex(index))
     }
     
     func sortHand() {
