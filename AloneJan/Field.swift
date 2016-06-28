@@ -89,10 +89,11 @@ class Field {
             Player(wind: .North)
         ]
         for player in players {
-            var drawCount = 13
-            if player.wind == .East {
-                drawCount += 1
-            }
+//            var drawCount = 13
+            let drawCount = 14
+//            if player.wind == .East {
+//                drawCount += 1
+//            }
             player.drawFrom(&stack, count: drawCount)
         }
         stirPlayersPoint()

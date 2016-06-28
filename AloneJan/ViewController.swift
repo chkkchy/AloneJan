@@ -10,10 +10,10 @@ import UIKit
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    let screenWidth = Double(UIScreen.mainScreen().bounds.size.width)
-    let screenHeight = Double(UIScreen.mainScreen().bounds.size.height)
+    private let screenWidth = Double(UIScreen.mainScreen().bounds.size.width)
+    private let screenHeight = Double(UIScreen.mainScreen().bounds.size.height)
     
-    let handCount = 14
+    private let handCount = 14
 
     private let pointLabel: UILabel = {
         let label = UILabel()
@@ -66,8 +66,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return collectionView
     }()
     
-    var field = Field()
-    var player: Player!
+    private var field: Field!
+    private var player: Player!
     
     
     override func viewDidLoad() {
@@ -77,12 +77,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(ViewController.onClick))
         self.view.backgroundColor = .whiteColor()
         
-        // TODO: このへん init() とかにまとめる
-        player = field.players[0] //field.players[Int(arc4random_uniform(UInt32(4)))] 現状index out of rangeなっちゃう
-        
-        updatePointLabel()
-        updateConditionLabel()
-        updateCountLabel()
         resetButton.addTarget(self, action: #selector(ViewController.tappedResetButton), forControlEvents: .TouchUpInside)
         sortButton.addTarget(self, action: #selector(ViewController.tappedSortButton), forControlEvents: .TouchUpInside)
         collectionView.delegate = self
@@ -94,6 +88,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         self.view.addSubview(resetButton)
         self.view.addSubview(sortButton)
         self.view.addSubview(collectionView)
+        
+        reset()
     }
     
     override func viewDidLayoutSubviews() {
@@ -107,9 +103,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-
+    
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if field.stack.isEmpty {
             return
@@ -134,12 +129,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func tappedResetButton() {
-        field = Field()
-        player = field.players[0] //field.players[Int(arc4random_uniform(UInt32(4)))]
-        updatePointLabel()
-        updateConditionLabel()
-        updateCountLabel()
-        collectionView.reloadData()
+        reset()
     }
     
     func tappedSortButton() {
@@ -156,7 +146,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func updateConditionLabel() {
-        conditionLabel.text = String(format: "%@%d局 %@家 %d本場 供託: %d ドラ: %@", field.round.description, field.hand, player.wind.description, field.honba, field.deposit, field.dora.string)
+        conditionLabel.text = String(
+            format: "%@%d局 %@家 %d本場 供託: %d ドラ: %@",
+            field.round.description, field.hand, player.wind.description, field.honba, field.deposit, field.dora.string
+        )
     }
     
     func updateCountLabel() {
@@ -167,4 +160,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         self.navigationController?.pushViewController(SettingViewController(), animated: true)
     }
     
+    func reset() {
+        field = Field()
+        player = field.players[Int(arc4random_uniform(UInt32(4)))]
+        updatePointLabel()
+        updateConditionLabel()
+        updateCountLabel()
+        collectionView.reloadData()
+    }
+
 }
