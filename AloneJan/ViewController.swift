@@ -65,7 +65,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         layout.minimumInteritemSpacing = margin
         layout.sectionInset = UIEdgeInsetsMake(5, margin, 0, margin)
         let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .darkGrayColor()
+        collectionView.backgroundColor = .clearColor()
         return collectionView
     }()
     
@@ -82,7 +82,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         layout.minimumLineSpacing = 1.5
         layout.sectionInset = UIEdgeInsetsMake(5, m, 0, m)
         let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .grayColor()
+        collectionView.backgroundColor = .lightGrayColor()
         return collectionView
     }()
     
